@@ -24,8 +24,10 @@ urlpatterns = [
     #Auth
 
     path('signup/', views.signupuser, name='signup'),
-    # path('login/', views.loginuser, name='login'),
+    path('logout/', views.logoutuser, name='logout'),
+    path('login/', views.loginuser, name='login'),
 
     #Current Tasks
+    path('', views.home, name='home'),
     path('current/', views.currenttasks, name='current')
 ]
