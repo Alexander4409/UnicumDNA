@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+{% if user.is_authenticated %}
+<div class="menu">
+    <div class="wrap">
+        <ul>
+            <li class="logo"><a href="">Пользователь: {{ user.username }}</a></li>
+            <li><a href="{% url 'current' %}">Домашнее задание</a></li>
+            <li><a href="">Выйти</a></li>
+        </ul>
+        {% else %}
+        <ul>
+            <li><a href="{% url 'signup' %}">Зарегистрироваться</a></li>
+            <li><a href="">Войти</a></li>
+        </ul>
+        {% endif %}
+    </div>
+</div>
+<div class="content">
+    <div class="wrap">
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+</body>
+</html>
