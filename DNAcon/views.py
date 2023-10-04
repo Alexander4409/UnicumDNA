@@ -68,6 +68,10 @@ def logoutuser(request):
         logout(request)
         return redirect('home')
 
+
+from django.shortcuts import render
+from .models import StudyMaterial
 def currenttasks(reqest):
-    return render(reqest, 'DNAcon/currenttasks.html')
+    materials = StudyMaterial.objects.all()
+    return render(reqest, 'DNAcon/currenttasks.html', {'materials': materials})
 

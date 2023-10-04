@@ -2,4 +2,16 @@
 
 {% block content %}
 <h1>Подготовка к ДНК конкурсу</h1>
+
+{% for material in materials %}
+<div class="material-card">
+    <h2>{{ material.title }}</h2>
+    <p>{{ material.description }}</p>
+    <video width="320" height="240" controls>
+        <source src="{{ material.video.url }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+{% endfor %}
 {% endblock %}
+
