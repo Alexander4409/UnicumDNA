@@ -1,9 +1,10 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
-
+from .forms import CustomUserCreationForm
 # Create your views here.
 
 
@@ -12,31 +13,24 @@ def home(request):
 
 
 def signupuser(request):
-    if request.method == "GET":
-        return render(request, 'DNAcon/signupuser.html',
-                      {'form': UserCreationForm()})
-    else:
-        if request.POST['password1'] == request.POST['password2']:
-            try:
-
-                user = User.objects.create_user(
-                    request.POST['username'],
-                    password=request.POST['password1']
-                )
-                user.save()
-                login(request,user)
-                return redirect('current')
-
-            except IntegrityError:
-
-                return render(request, 'DNAcon/signupuser.html',
-                      {'form': UserCreationForm(),
-                       'error':'Пользователь с таким именем уже существует!'})
-
+    page = "register"
+    form = CustomUserCreationForm
+    if request.method == "POST":
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower().strip()
+            user.save()
+            messages.success(request, "User account was created!")
+            login(request, user)
+            return redirect('current')
         else:
-            return render(request, 'DNAcon/signupuser.html',
-                          {'form': UserCreationForm(),
-                           'error': 'Пароли не совпадают!'})
+            messages.error(request, 'An error has occurred during registration!')
+
+    context = {'page': page, 'form': form}
+    return render(request, 'DNAcon/signupuser.html', context)
+
+
 
 
 def loginuser(request):
