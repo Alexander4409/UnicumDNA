@@ -4,7 +4,7 @@ from django import forms
 
 
 class CustomUserCreationForm(UserCreationForm):
-    phone_number = forms.CharField(max_length=15, required=True)
+    phone_number = forms.CharField(max_length=15, required=True, label="Номер телефона")
 
     # Определите список доступных групп
     GROUP_CHOICES = (
@@ -15,16 +15,21 @@ class CustomUserCreationForm(UserCreationForm):
     )
 
     # Используйте ChoiceField для выбора группы
-    group = forms.ChoiceField(choices=GROUP_CHOICES, required=True)
+    group = forms.ChoiceField(choices=GROUP_CHOICES, required=True, label="Группа")
 
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email', 'username', 'password1', 'password2', 'phone_number', 'group']
 
         labels = {
-            'first_name': 'Name',
-            'last_name': 'Last Name',
-            'phone_number': 'Phone Number',
+            'first_name': 'Имя',
+            'last_name': 'Фамилия',
+            'phone_number': 'Номер телефона',
+            'group': 'Группа',
+            'username': 'Имя пользователя',
+            'email': 'Email',
+            'password1': 'Пароль',
+            'password2': 'Подтвердите пароль',
         }
 
     def __init__(self, *args, **kwargs):
