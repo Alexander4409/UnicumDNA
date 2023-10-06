@@ -1,12 +1,22 @@
 
 {% extends 'DNAcon/base.html' %}
 {% block content %}
-  <h1>Ваши файлы</h1>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Загрузить</button>
-  </form>
+<h1>Ваши файлы</h1>
+<h2>Обратите внимание!</h2>
+<h3>Для того чтобы мы могли легко наити и проверить ваше домашнее задание,</h3>
+<h3>в названии файла укажите тему, вашу группу и фамилию!</h3>
+<h2>Пример : "Название_темы_ИП-64_Иванов_А_А"</h2>
+<h2>Важно!!!</h2>
+<h2>Загрузить фаил можно только в pdf, doc, docx и txt</h2>
+
+<div class="form_upload">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Загрузить</button>
+    </form>
+</div>
+
 
   <h2>Список ваших файлов:</h2>
  <ul>

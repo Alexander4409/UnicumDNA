@@ -99,6 +99,7 @@ button{
     margin-top: 40px;
     font-size: 24px;
     cursor: pointer;
+    margin-top: 10px;
 }
 .center{
     text-align: center;
@@ -127,6 +128,8 @@ input{
     box-shadow: 0 2px 8px 2px #003366;
     margin-bottom: 20px;
     font-size: 20px;
+    text-align: center;
+    border-radius: 10px;
 }
 .content a{
     color: #000;
@@ -162,4 +165,70 @@ a b{
 
 .custom-upload-button:hover {
     background-color: #0056b3;
+}
+
+/* Стилизация меню */
+.menu {
+    background: #330066; /* Темно-синий цвет */
+    box-shadow: 0 2px 12px 2px #330066;
+}
+
+.menu ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+    padding: 0;
+}
+
+.menu .logo {
+    margin-right: 30%;
+    color: #FFFFFF;
+}
+
+/* Стилизация заголовков */
+h1, h2 {
+    color: #330066;
+}
+
+/* Стилизация кнопок */
+.btn {
+    background: #6633CC;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #450D66; /* Цвет при наведении */
+}
+
+/* Стилизация полей ввода */
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #6633CC;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+/* Стилизация карточек с заданиями */
+.material-card {
+    border: 1px solid #6633CC; /* Граница для карточки */
+    border-radius: 8px; /* Закругление углов */
+    padding: 20px; /* Отступы внутри карточки */
+    margin-bottom: 20px; /* Отступ снизу между карточками */
+    margin-right: 40px;
+}
+
+.block {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-bottom: 60px ;
+
+}
+.form_upload {
+    text-align: center;
 }
