@@ -14,6 +14,7 @@
         <ul>
             <li class="logo"><a href="">Пользователь: {{ user.username }}</a></li>
             <li><a href="{% url 'current' %}">Домашнее задание</a></li>
+            <li><a href="{% url 'user_files' %}">Загрузить задание</a></li>
             <li>
                 <form action="{% url 'logout' %}" method="post">
                     {% csrf_token %}

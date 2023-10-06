@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import FileExtensionValidator
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -8,9 +10,6 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
-
-
-from django.core.validators import FileExtensionValidator
 
 
 class StudyMaterial(models.Model):
@@ -22,6 +21,17 @@ class StudyMaterial(models.Model):
         validators=[FileExtensionValidator(allowed_extensions=['mp4'])]
     )
 
-
     def __str__(self):
         return self.title
+
+
+class UserFile(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    uploaded_file = models.FileField(
+        upload_to='homeWork/',
+        validators=[FileExtensionValidator(['pdf', 'doc', 'docx', 'txt'])]
+    )
+    upload_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.uploaded_file.name

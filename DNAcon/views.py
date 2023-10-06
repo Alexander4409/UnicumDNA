@@ -3,8 +3,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import Group
 from django.contrib.auth import login, logout, authenticate
-from .forms import CustomUserCreationForm
-from .models import UserProfile
+from .forms import CustomUserCreationForm, UserFileForm
+from .models import UserProfile, StudyMaterial,UserFile
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
 
@@ -69,9 +72,38 @@ def logoutuser(request):
         return redirect('home')
 
 
-from django.shortcuts import render
-from .models import StudyMaterial
-def currenttasks(reqest):
-    materials = StudyMaterial.objects.all()
-    return render(reqest, 'DNAcon/currenttasks.html', {'materials': materials})
+@login_required
+def currenttasks(request):
 
+    materials = StudyMaterial.objects.all()
+
+    return render(request, 'DNAcon/currenttasks.html', {'materials': materials})
+
+
+
+@login_required
+def user_files(request):
+    if request.method == 'POST':
+        form = UserFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            user_file = form.save(commit=False)
+            user_file.user = request.user
+            user_file.save()
+            form = UserFileForm()
+
+    else:
+        form = UserFileForm()
+
+    user_files = UserFile.objects.filter(user=request.user)
+    return render(request, 'DNAcon/user_files.html', {'form': form, 'user_files': user_files})
+
+
+
+@login_required
+def delete_file(request, file_id):
+    user_file = get_object_or_404(UserFile, id=file_id)
+
+    if user_file.user == request.user:
+        user_file.delete()
+
+    return redirect('user_files')

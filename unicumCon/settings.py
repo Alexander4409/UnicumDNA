@@ -60,7 +60,7 @@ ROOT_URLCONF = 'unicumCon.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -131,5 +131,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 import os
 
 MEDIA_URL = '/media/'
-
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'

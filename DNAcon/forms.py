@@ -13,8 +13,6 @@ class CustomUserCreationForm(UserCreationForm):
         ('Р-71', 'Р-71'),
         # Добавьте другие группы по аналогии
     )
-
-    # Используйте ChoiceField для выбора группы
     group = forms.ChoiceField(choices=GROUP_CHOICES, required=True, label="Группа")
 
     class Meta:
@@ -38,3 +36,17 @@ class CustomUserCreationForm(UserCreationForm):
         for field in self.fields:
             self.fields[field].widget.attrs.update({'class': 'input'})
 
+
+# forms.py
+
+from django import forms
+from .models import UserFile
+
+class UserFileForm(forms.ModelForm):
+    class Meta:
+        model = UserFile
+        fields = ('uploaded_file',)
+
+        labels = {
+            'uploaded_file':'Загрузите файл'
+        }

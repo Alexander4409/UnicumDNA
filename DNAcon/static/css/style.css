@@ -147,3 +147,19 @@ input{
 a b{
     color: orangered;
 }
+
+.file-input {
+    display: none;
+}
+
+.custom-upload-button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 15px;
+    cursor: pointer;
+    border: none;
+}
+
+.custom-upload-button:hover {
+    background-color: #0056b3;
+}
